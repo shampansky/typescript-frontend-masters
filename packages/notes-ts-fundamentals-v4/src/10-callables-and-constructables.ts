@@ -58,7 +58,6 @@ function handleMainEvent(
 const myFrame = document.getElementsByTagName('iframe')[0]
 handleMainEvent(myFrame, (val) => {})
 
-/*
 // //? Add above handleMainEvent function declaration
 // function handleMainEvent(
 //     elem: HTMLFormElement,
@@ -74,17 +73,16 @@ handleMainEvent(myFrame, (val) => {})
 // })
 
 //* `this` types
-/*
-// function myClickHandler(event: Event) {
-//     // this.disabled = true
-// }
-// myClickHandler(new Event("click")) // maybe ok?
 
-/*
-// const myButton = document.getElementsByTagName("button")[0]
-// const boundHandler = myClickHandler.bind(myButton)
-// boundHandler(new Event("click")) // bound version: ok
-// myClickHandler.call(myButton, new Event("click")) // also ok
+function myClickHandler(this: HTMLButtonElement, event: Event) {
+  this.disabled = true
+}
+myClickHandler(new Event('click')) // maybe ok?
+
+const myButton = document.getElementsByTagName('button')[0]
+const boundHandler = myClickHandler.bind(myButton)
+boundHandler(new Event('click')) // bound version: ok
+myClickHandler.call(myButton, new Event('click')) // also ok
 
 //* Function best practices
 /*
